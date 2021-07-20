@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ddc56179-b945-4ba3-99b8-47a6f8d1d8c4",
+		"_postman_id": "8a6daa90-da5d-47db-8691-557900c863b5",
 		"name": "Ongoing WMS SOAP API examples",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -91,7 +91,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "c6aad941-13d3-472c-ac6b-ee4d48cef1f1",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -101,15 +100,13 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "27fea7e2-889a-496e-bbac-2d88a2120c95",
 						"type": "text/javascript",
 						"exec": [
 							""
 						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Order",
@@ -269,9 +266,125 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get order statuses",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"type": "text",
+								"value": "\"http://ongoingsystems.se/WSI/GetOrderStatuses\""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/xml;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n   <soap:Body>\r\n      <GetOrderStatuses xmlns=\"http://ongoingsystems.se/WSI\">\r\n         <UserName>{{Username}}</UserName>\r\n         <Password>{{Password}}</Password>\r\n         <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n      </GetOrderStatuses>\r\n   </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update the order status of an order",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"type": "text",
+								"value": "\"http://ongoingsystems.se/WSI/UpdateOrder\""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/xml;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <UpdateOrder xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <updateOrder>\r\n                <OrderUpdateIdentification>\r\n                    <OrderIdentificationType>GoodsOwnerOrderNumber</OrderIdentificationType>\r\n                    <GoodsOwnerOrderNumber>{{GoodsOwnerOrderNumber}}</GoodsOwnerOrderNumber>\r\n                </OrderUpdateIdentification>\r\n                <UpdateOrderStatus>\r\n                    <OrderStatus>300</OrderStatus>\r\n                </UpdateOrderStatus>\r\n            </updateOrder>\r\n        </UpdateOrder>\r\n    </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update the order line comment on an order line",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"type": "text",
+								"value": "\"http://ongoingsystems.se/WSI/UpdateOrderLines\""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/xml;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <UpdateOrderLines xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <UpdateOrderLines>\r\n                <UpdateOrderIdentification>\r\n                    <OrderIdentificationType>GoodsOwnerOrderNumber</OrderIdentificationType>\r\n                    <GoodsOwnerOrderNumber>{{GoodsOwnerOrderNumber}}</GoodsOwnerOrderNumber>\r\n                </UpdateOrderIdentification>\r\n                <OrderLines>\r\n                    <UpdateOrderLine>\r\n                        <UpdateOrderLineIdentification>\r\n                            <OrderLineIdentificationType>ExternalOrderLineCode</OrderLineIdentificationType>\r\n                            <ExternalOrderLineCode>{{ExternalOrderLineCode}}</ExternalOrderLineCode>\r\n                        </UpdateOrderLineIdentification>\r\n                        <UpdateComment>\r\n                            <OrderLineComment>New line comment</OrderLineComment>\r\n                        </UpdateComment>\r\n                    </UpdateOrderLine>\r\n                </OrderLines>\r\n            </UpdateOrderLines>\r\n        </UpdateOrderLines>\r\n    </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Purchase order",
@@ -353,9 +466,125 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get purchase order statuses",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"type": "text",
+								"value": "\"http://ongoingsystems.se/WSI/GetInOrderStatuses\""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/xml;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n   <soap:Body>\r\n      <GetInOrderStatuses xmlns=\"http://ongoingsystems.se/WSI\">\r\n         <UserName>{{Username}}</UserName>\r\n         <Password>{{Password}}</Password>\r\n         <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n      </GetInOrderStatuses>\r\n   </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update the status of a purchase order",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"type": "text",
+								"value": "\"http://ongoingsystems.se/WSI/UpdateInOrder\""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/xml;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <UpdateInOrder xmlns=\"http://ongoingsystems.se/WSI\">\r\n      <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n      <UserName>{{Username}}</UserName>\r\n      <Password>{{Password}}</Password>\r\n      <updateInOrder>\r\n        <InOrderUpdateIdentification>\r\n          <InOrderIdentificationType>GoodsOwnerOrderNumber</InOrderIdentificationType>\r\n          <GoodsOwnerOrderNumber>DEL8986548</GoodsOwnerOrderNumber>\r\n        </InOrderUpdateIdentification>\r\n        <UpdateInOrderStatus>\r\n          <InOrderStatus>200</InOrderStatus>\r\n        </UpdateInOrderStatus>\r\n      </updateInOrder>\r\n    </UpdateInOrder>\r\n  </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update reported number of items on a purchase order line",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"type": "text",
+								"value": "\"http://ongoingsystems.se/WSI/UpdateInOrderLines\""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/xml;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n   <soap:Body>\r\n      <UpdateInOrderLines xmlns=\"http://ongoingsystems.se/WSI\">\r\n         <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n         <UserName>{{Username}}</UserName>\r\n         <Password>{{Password}}</Password>\r\n         <UpdateInOrderLines>\r\n            <UpdateInOrderIdentification>\r\n               <InOrderIdentificationType>GoodsOwnerOrderNumber</InOrderIdentificationType>\r\n               <GoodsOwnerOrderNumber>DEL8986548</GoodsOwnerOrderNumber>\r\n            </UpdateInOrderIdentification>\r\n            <InOrderLines>\r\n               <UpdateInOrderLine>\r\n                  <UpdateInOrderLineIdentification>\r\n                     <InOrderLineIdentificationType>ExternalOrderLineCode</InOrderLineIdentificationType>\r\n                     <ExternalOrderLineCode>10</ExternalOrderLineCode>\r\n                  </UpdateInOrderLineIdentification>\r\n                  <UpdateReportedNumberOfItems>\r\n                     <ReportedNumberOfItems>10</ReportedNumberOfItems>\r\n                  </UpdateReportedNumberOfItems>\r\n               </UpdateInOrderLine>\r\n            </InOrderLines>\r\n         </UpdateInOrderLines>\r\n      </UpdateInOrderLines>\r\n   </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Return order",
@@ -438,8 +667,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Transporter contracts",
@@ -483,8 +711,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Inventory",
@@ -645,8 +872,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Warehouse transfer",
@@ -690,15 +916,13 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "9ce6889d-f636-482d-b61d-35b787da3913",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -708,7 +932,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "eb187873-d3ad-4e08-9145-069df6726296",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -718,30 +941,24 @@
 	],
 	"variable": [
 		{
-			"id": "fb62b487-44e9-43fe-b909-11f69e3adc45",
 			"key": "GoodsOwnerCode",
 			"value": "Training"
 		},
 		{
-			"id": "697729ae-4a07-41ee-b454-730954b79f39",
 			"key": "GoodsOwnerId",
 			"value": "-1"
 		},
 		{
-			"id": "20fb0c2f-9c6a-4b8d-98f9-ca3f08df7617",
 			"key": "Username",
 			"value": "Username"
 		},
 		{
-			"id": "18615f82-0434-4784-8814-fa61b6a862ae",
 			"key": "Password",
 			"value": "Password"
 		},
 		{
-			"id": "c535826f-3ddb-4c2f-a177-a2e944291056",
 			"key": "OngoingURL",
 			"value": "https://api.ongoingsystems.se/YourWarehouse/Service.asmx"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
