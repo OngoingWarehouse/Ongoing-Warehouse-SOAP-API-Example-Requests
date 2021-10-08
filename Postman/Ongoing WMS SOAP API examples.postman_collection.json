@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8a6daa90-da5d-47db-8691-557900c863b5",
+		"_postman_id": "ec7a6552-3808-4761-b47f-407d7e92972c",
 		"name": "Ongoing WMS SOAP API examples",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -413,6 +413,45 @@
 						"body": {
 							"mode": "raw",
 							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <ProcessInOrder xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <co>\r\n                <InOrderInfo>\r\n                    <InOrderIdentification>GoodsOwnerOrderNumber</InOrderIdentification>\r\n                    <InOrderOperation>CreateOrUpdate</InOrderOperation>\r\n                    <GoodsOwnerOrderNumber>DEL8986548</GoodsOwnerOrderNumber>\r\n                </InOrderInfo>\r\n                <InOrderLines>\r\n                    <InOrderLine>\r\n                        <OrderLineIdentification>ExternalOrderLineCode</OrderLineIdentification>\r\n                        <ArticleIdentification>ArticleNumber</ArticleIdentification>\r\n                        <!-- Row number - must be unique -->\r\n                        <ExternalOrderLineCode>10</ExternalOrderLineCode>\r\n                        <ArticleNumber>ArtNr1</ArticleNumber>\r\n                        <NumberOfItems>700</NumberOfItems>\r\n                    </InOrderLine>\r\n                    <InOrderLine>\r\n                        <OrderLineIdentification>ExternalOrderLineCode</OrderLineIdentification>\r\n                        <ArticleIdentification>ArticleNumber</ArticleIdentification>\r\n                        <!-- Row number - must be unique -->\r\n                        <ExternalOrderLineCode>20</ExternalOrderLineCode>\r\n                        <ArticleNumber>ArtNr2</ArticleNumber>\r\n                        <NumberOfItems>1000</NumberOfItems>\r\n                    </InOrderLine>\r\n                </InOrderLines>\r\n            </co>\r\n        </ProcessInOrder>\r\n    </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attach a file to a purchase order",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"type": "text",
+								"value": "\"http://ongoingsystems.se/WSI/UploadInOrderFile\""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "text/xml;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <UploadInOrderFile xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <InOrderFile>\r\n                <File>\r\n                    <FileName>TestFile.txt</FileName>\r\n                    <FileBytes>QSBzdHJpbmc=</FileBytes>\r\n                    <MimeType>application/text</MimeType>\r\n                </File>\r\n                <GoodsOwnerId>{{GoodsOwnerId}}</GoodsOwnerId>\r\n                <InOrderFileIdentificationType>GoodsOwnerOrderNumber</InOrderFileIdentificationType>\r\n                <GoodsOwnerOrderNumber>PO123</GoodsOwnerOrderNumber>\r\n            </InOrderFile>\r\n        </UploadInOrderFile>\r\n    </soap:Body>\r\n</soap:Envelope>",
 							"options": {
 								"raw": {
 									"language": "xml"
