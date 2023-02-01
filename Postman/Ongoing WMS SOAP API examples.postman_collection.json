@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3b6b9a03-3fea-4ee3-8199-33b472bd9ff1",
+		"_postman_id": "0e6a3d19-91f3-49da-9bb1-0568992077c4",
 		"name": "Ongoing WMS SOAP API examples",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23367424"
 	},
 	"item": [
 		{
@@ -31,7 +32,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <ProcessArticle xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <art>\r\n                <ArticleOperation>CreateOrUpdate</ArticleOperation>\r\n                <ArticleIdentification>ArticleNumber</ArticleIdentification>\r\n                <ArticleNumber>ArtNo1</ArticleNumber>\r\n                <ArticleName>My article</ArticleName>\r\n                <SupplierArticleNumber>SupNo1</SupplierArticleNumber>\r\n                <BarCode>73312345</BarCode>\r\n                <Weight>11</Weight>\r\n                <Volume>1200</Volume>\r\n                <QuantityPerPallet>500</QuantityPerPallet>\r\n                <QuantityPerPackage>50</QuantityPerPackage>\r\n                <MainSupplier>\r\n                    <SupplierIdentificationType>SupplierNumber</SupplierIdentificationType>\r\n                    <SupplierOperation>CreateOrFind</SupplierOperation>\r\n                    <SupplierNumber>SUP1</SupplierNumber>\r\n                    <SupplierName>Supplier Inc</SupplierName>\r\n                </MainSupplier>\r\n            </art>\r\n        </ProcessArticle>\r\n    </soap:Body>\r\n</soap:Envelope>",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <ProcessArticle xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <art>\r\n                <ArticleOperation>CreateOrUpdate</ArticleOperation>\r\n                <ArticleIdentification>ArticleNumber</ArticleIdentification>\r\n                <ArticleNumber>!DG_01</ArticleNumber>\r\n                <ArticleName>William farligt gods 01</ArticleName>\r\n                <DangerousGoods>\r\n                    <UNNumber>0197</UNNumber>\r\n                    <UNProperShippingName>\r\n                        <Name>PROPER DANGEROUS M8</Name>\r\n                        <LanguageCode>EN</LanguageCode>\r\n                    </UNProperShippingName>\r\n                </DangerousGoods>\r\n            </art>\r\n        </ProcessArticle>\r\n    </soap:Body>\r\n</soap:Envelope>",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -509,9 +510,7 @@
 				{
 					"name": "Get purchase order by query",
 					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"content-type": true
-						}
+						"disabledSystemHeaders": {}
 					},
 					"request": {
 						"method": "POST",
@@ -529,7 +528,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <GetInOrdersByQuery xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <query>\r\n                <InOrderNumbersToGet>\r\n                    <string>DEL1001</string>\r\n                    <string>DEL1002</string>\r\n                </InOrderNumbersToGet>\r\n            </query>\r\n        </GetInOrdersByQuery>\r\n    </soap:Body>\r\n</soap:Envelope>",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <GetInOrdersByQuery xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <query>\r\n                <InOrderNumbersToGet>\r\n                    <string>serienummer_test</string>\r\n                </InOrderNumbersToGet>\r\n            </query>\r\n        </GetInOrdersByQuery>\r\n    </soap:Body>\r\n</soap:Envelope>",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -647,6 +646,40 @@
 						"body": {
 							"mode": "raw",
 							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n   <soap:Body>\r\n      <UpdateInOrderLines xmlns=\"http://ongoingsystems.se/WSI\">\r\n         <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n         <UserName>{{Username}}</UserName>\r\n         <Password>{{Password}}</Password>\r\n         <UpdateInOrderLines>\r\n            <UpdateInOrderIdentification>\r\n               <InOrderIdentificationType>GoodsOwnerOrderNumber</InOrderIdentificationType>\r\n               <GoodsOwnerOrderNumber>DEL8986548</GoodsOwnerOrderNumber>\r\n            </UpdateInOrderIdentification>\r\n            <InOrderLines>\r\n               <UpdateInOrderLine>\r\n                  <UpdateInOrderLineIdentification>\r\n                     <InOrderLineIdentificationType>ExternalOrderLineCode</InOrderLineIdentificationType>\r\n                     <ExternalOrderLineCode>10</ExternalOrderLineCode>\r\n                  </UpdateInOrderLineIdentification>\r\n                  <UpdateReportedNumberOfItems>\r\n                     <ReportedNumberOfItems>10</ReportedNumberOfItems>\r\n                  </UpdateReportedNumberOfItems>\r\n               </UpdateInOrderLine>\r\n            </InOrderLines>\r\n         </UpdateInOrderLines>\r\n      </UpdateInOrderLines>\r\n   </soap:Body>\r\n</soap:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{OngoingURL}}",
+							"host": [
+								"{{OngoingURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get received in order tags by order id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SOAPAction",
+								"value": "\"http://ongoingsystems.se/WSI/GetReceivedTagsByQuery\"",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml;charset=utf-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n      <GetReceivedTagsByQuery xmlns=\"http://ongoingsystems.se/WSI\">\r\n        <UserName>{{Username}}</UserName>\r\n        <Password>{{Password}}</Password>\r\n        <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n        <Query>\r\n          <InOrderId>2785</InOrderId>\r\n        </Query>\r\n      </GetReceivedTagsByQuery>\r\n   </soap:Body>\r\n</soap:Envelope>",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -856,7 +889,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <GetInventoryByQuery xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <GetInventoryQuery>\r\n                <MaxArticlesToGet>100</MaxArticlesToGet>\r\n            </GetInventoryQuery>\r\n        </GetInventoryByQuery>\r\n    </soap:Body>\r\n</soap:Envelope>",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <GetInventoryByQuery xmlns=\"http://ongoingsystems.se/WSI\">\r\n            <GoodsOwnerCode>{{GoodsOwnerCode}}</GoodsOwnerCode>\r\n            <UserName>{{Username}}</UserName>\r\n            <Password>{{Password}}</Password>\r\n            <GetInventoryQuery>\r\n                <ArticleSystemIdFrom>34293</ArticleSystemIdFrom>\r\n                <MaxArticlesToGet>1</MaxArticlesToGet>\r\n            </GetInventoryQuery>\r\n        </GetInventoryByQuery>\r\n    </soap:Body>\r\n</soap:Envelope>",
 							"options": {
 								"raw": {
 									"language": "xml"
