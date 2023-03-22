@@ -1,4 +1,5 @@
 <a href="https://ongoingwarehouse.com">![Logo](https://ongoingwarehouse.com/images/logo/ongoing_logo_rgb_150.webp)</a>
+
 # Ongoing Warehouse Goods Owner SOAP API example requests
 [Ongoing WMS](https://ongoingwarehouse.com/) is a Warehouse Management System (WMS).
 
@@ -15,3 +16,8 @@ These examples will show you how to:
 * Read transporter contracts (shipping methods).
 
 We also provide a [WSDL file](https://developer.ongoingwarehouse.com/Basics) for our API. This is a machine-readable specification of the API, which allows you to automatically generate client code for your own programming language.
+
+## How to import the Postman collection
+1. Clone this repository.
+2. Import the collection file into Postman
+    - For this we refer to the Postman documentation: [Importing Postman data](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-postman-data)
